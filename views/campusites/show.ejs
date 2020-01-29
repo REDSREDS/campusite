@@ -1,0 +1,52 @@
+<%- include('../../partials/header'); %>
+
+<div class="container content-body">
+    <div class="container" id="show-body">
+        <img  class="img-thumbnail rounded mx-auto d-block" src="<%= site.img %>" alt="">
+        <div id="information" class="d-flex justify-content-between">
+            <div id="site-information">
+                <h3 class="content"><%= site.name %></h3>
+                <h5 class="content"><%= site.campus %></h5>
+            </div>
+
+            <div id="author-information">
+                <p><em>created by <%= site.author.username %></em></p>
+                <p><strong><%= moment(site.createdAt).fromNow() %></strong></p>
+            </div>
+        </div>
+        
+        <div id="editSite" class="d-flex pt-2 justify-content-left">
+            <% if(currentUser && currentUser._id.equals(site.author.id)) { %>
+                <a href="/campusites/<%= site._id %>/edit" class="btn btn-warning">Edit</a>
+                <form action="/campusites/<%= site._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            <% } %>
+        </div>
+        <p id="site-body"><%= site.body %></p>
+    </div>
+    
+    <div class="card" id="comment-card">
+        <div class="card-header">Comments</div>
+        <div class="card-body">
+            <% site.comments.forEach(function(comment) { %>
+                <div class="d-flex justify-content-between">
+                    <div id="comment-left">
+                        <p><strong><em><i class="fas fa-pen"></i> by <%= comment.author.username %></em></strong></p>
+                        <p><%= comment.text %></p>
+                    </div>
+
+                    <div id="comment-right">
+                        <p><strong><%= moment(comment.createdAt).fromNow() %></strong></p>
+                    </div>
+                    
+                </div>
+                <p id="comment-divider">- - - -</p>
+            <% }) %>
+            <a href="./<%= site._id %>/comments/new">New comments</a>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer'); %>
