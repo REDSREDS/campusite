@@ -15,6 +15,7 @@ var express = require("express"),
 // mongoose.connect("mongodb://localhost:27017/campusites", {useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect("mongodb+srv://max:HUANhuan123@cluster0-ognw1.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true, 
+    useUnifiedTopology: true,
     useCreateIndex:true
 }).then(() => {
     console.log("connected to DB");
