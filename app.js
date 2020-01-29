@@ -25,7 +25,7 @@ mongoose.connect("mongodb+srv://max:HUANhuan123@cluster0-ognw1.mongodb.net/test?
 
 
 var app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 var commentRoutes = require("./routes/comments"),
     campusiteRoutes = require("./routes/campusites"),
